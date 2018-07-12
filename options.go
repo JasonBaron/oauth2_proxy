@@ -96,7 +96,6 @@ type SignatureData struct {
 
 func NewOptions() *Options {
 	return &Options{
-<<<<<<< HEAD
 		ProxyPrefix:          "/oauth2",
 		HttpAddress:          "127.0.0.1:4180",
 		HttpsAddress:         ":443",
@@ -112,30 +111,11 @@ func NewOptions() *Options {
 		PassUserHeaders:      true,
 		PassAccessToken:      false,
 		PassHostHeader:       true,
+		PassRolesHeader:     false,
+		SkipProviderButton:  false,
 		ApprovalPrompt:       "force",
 		RequestLogging:       true,
 		RequestLoggingFormat: defaultRequestLoggingFormat,
-=======
-		ProxyPrefix:         "/oauth2",
-		HttpAddress:         "127.0.0.1:4180",
-		HttpsAddress:        ":443",
-		DisplayHtpasswdForm: true,
-		CookieName:          "_oauth2_proxy",
-		CookieSecure:        true,
-		CookieHttpOnly:      true,
-		CookieExpire:        time.Duration(168) * time.Hour,
-		CookieRefresh:       time.Duration(0),
-		SetXAuthRequest:     false,
-		SkipAuthPreflight:   false,
-		PassBasicAuth:       true,
-		PassUserHeaders:     true,
-		PassAccessToken:     false,
-		PassHostHeader:      true,
-		PassRolesHeader:     false,
-		SkipProviderButton:  false,
-		ApprovalPrompt:      "force",
-		RequestLogging:      true,
->>>>>>> 932c80ee5506cefc83cae727c1d3ee18d2e8f717
 	}
 }
 
