@@ -695,19 +695,9 @@ func (p *OAuthProxy) Authenticate(rw http.ResponseWriter, req *http.Request) int
 			req.Header["X-Forwarded-Email"] = []string{session.Email}
 		}
 	}
-	if p.SetXAuthRequest {
-		rw.Header().Set("X-Auth-Request-User", session.User)
-		if session.Email != "" {
-			rw.Header().Set("X-Auth-Request-Email", session.Email)
-		}
-		if session.Roles != "" {
-			rw.Header().Set("X-Auth-Request-Role", session.Roles)
-		}
-	}
 	if p.PassAccessToken && session.AccessToken != "" {
 		req.Header["X-Forwarded-Access-Token"] = []string{session.AccessToken}
 	}
-
 	if p.PassRolesHeader {
 		rp := p.provider.(providers.RoleProvider)
 		roles := rp.GetUserRoles()
@@ -728,7 +718,15 @@ func (p *OAuthProxy) Authenticate(rw http.ResponseWriter, req *http.Request) int
 			log.Printf("User role data - %v", roles)
 		}
 	}
-
+  if p.SetXAuthRequest {
+		rw.Header().Set("X-Auth-Request-User", session.User)
+		if session.Email != "" {
+			rw.Header().Set("X-Auth-Request-Email", session.Email)
+		}
+		if session.Roles != "" {
+			rw.Header().Set("X-Auth-Request-Role", session.Roles)
+		}
+	}
 	if session.Email == "" {
 		rw.Header().Set("GAP-Auth", session.User)
 	} else {
