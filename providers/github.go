@@ -325,3 +325,4 @@ func (p *GitHubProvider) GetUserRoles() string {
 	}
 
 	return strings.Join(presentRoles, ",")
+}
