@@ -15,7 +15,7 @@ type SessionState struct {
 	RefreshToken string
 	Email        string
 	User         string
-	Roles         string
+	Roles        string
 }
 
 func (s *SessionState) IsExpired() bool {

@@ -23,8 +23,7 @@ type Provider interface {
 // for a user. For Providers like GitHub this would be the teams the user
 // is a member of.
 type RoleProvider interface {
-	GetUserRoles() string
-	SetUserRoles(string) (bool, error)
+  GetUserRoles() string
 }
 
 // New gives you an instance of the given provider
