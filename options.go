@@ -226,11 +226,11 @@ func (o *Options) Validate() error {
 	}
 
 	// Confirm the provider type supports sending user roles
-	if o.PassRolesHeader {
-		if _, ok := o.provider.(providers.RoleProvider); !ok {
-			msgs = append(msgs, "Provider '"+o.provider.Data().ProviderName+"' does not support sending a roles header.")
-		}
-	}
+	// if o.PassRolesHeader {
+	// 	if _, ok := o.provider.(providers.RoleProvider); !ok {
+	// 		msgs = append(msgs, "Provider '"+o.provider.Data().ProviderName+"' does not support sending a roles header.")
+	// 	}
+	// }
 
 	if len(o.GoogleGroups) > 0 || o.GoogleAdminEmail != "" || o.GoogleServiceAccountJSON != "" {
 		if len(o.GoogleGroups) < 1 {
