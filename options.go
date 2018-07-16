@@ -56,7 +56,8 @@ type Options struct {
 	BasicAuthPassword     string   `flag:"basic-auth-password" cfg:"basic_auth_password"`
 	PassAccessToken       bool     `flag:"pass-access-token" cfg:"pass_access_token"`
 	PassHostHeader        bool     `flag:"pass-host-header" cfg:"pass_host_header"`
-	SkipProviderButton    bool     `flag:"skip-provider-button" cfg:"skip_provider_button"`
+   PassRolesHeader   bool     `flag:"pass-roles-header" cfg:"pass_roles_header"`
+   SkipProviderButton    bool     `flag:"skip-provider-button" cfg:"skip_provider_button"`
 	PassUserHeaders       bool     `flag:"pass-user-headers" cfg:"pass_user_headers"`
 	SSLInsecureSkipVerify bool     `flag:"ssl-insecure-skip-verify" cfg:"ssl_insecure_skip_verify"`
 	SetXAuthRequest       bool     `flag:"set-xauthrequest" cfg:"set_xauthrequest"`
@@ -110,6 +111,8 @@ func NewOptions() *Options {
 		PassUserHeaders:      true,
 		PassAccessToken:      false,
 		PassHostHeader:       true,
+		PassRolesHeader:     false,
+		SkipProviderButton:  false,
 		ApprovalPrompt:       "force",
 		RequestLogging:       true,
 		RequestLoggingFormat: defaultRequestLoggingFormat,
@@ -221,6 +224,13 @@ func (o *Options) Validate() error {
 			o.CookieRefresh.String(),
 			o.CookieExpire.String()))
 	}
+
+	// Confirm the provider type supports sending user roles
+	// if o.PassRolesHeader {
+	// 	if _, ok := o.provider.(providers.RoleProvider); !ok {
+	// 		msgs = append(msgs, "Provider '"+o.provider.Data().ProviderName+"' does not support sending a roles header.")
+	// 	}
+	// }
 
 	if len(o.GoogleGroups) > 0 || o.GoogleAdminEmail != "" || o.GoogleServiceAccountJSON != "" {
 		if len(o.GoogleGroups) < 1 {
